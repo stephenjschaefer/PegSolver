@@ -3,5 +3,17 @@
   <%= raw "#{r}" %><br>
 <% end %>
 </div>
+Valid Moves:<br>
+<%= raw @show_valid_moves %>
+<br>
+Valid Moves:<br>
+<% @valid_moves.each do |m| %>
+  <%= "#{@valid_moves.index(m)}: " %>
+  <% m.each do |v| %>
+    <%= "#{v}" %>
+  <% end %>
+  <br>
+<% end %>
+
 
 
