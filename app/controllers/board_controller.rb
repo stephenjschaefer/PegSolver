@@ -2,6 +2,8 @@ class BoardController < ApplicationController
   def show
     board = Board.new(state: [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0])
     @state = board.state
+    @valid_moves = board.valid_moves
+    @show_valid_moves = board.show_valid_moves
     @top = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
     @row1 = "&nbsp;&nbsp;&nbsp;&nbsp;/#{board.decode(@state[0])}\\&nbsp;&nbsp;&nbsp;&nbsp;"
     @row2 = "&nbsp;&nbsp;&nbsp;/#{board.decode(@state[1])} #{board.decode(@state[2])}\\&nbsp;&nbsp;&nbsp;"
@@ -10,7 +12,5 @@ class BoardController < ApplicationController
     @row5 = "/#{board.decode(@state[10])} #{board.decode(@state[11])} #{board.decode(@state[12])} #{board.decode(@state[13])} #{board.decode(@state[14])}\\"
     @bottom = '‾‾‾‾‾‾‾‾‾‾‾'
     @rows = [@top, @row1, @row2, @row3, @row4, @row5, @bottom]
-    @valid_moves = board.valid_moves
-    @show_valid_moves = board.show_valid_moves
   end
 end
