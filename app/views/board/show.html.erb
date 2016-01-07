@@ -1,0 +1,39 @@
+<h1>Show Board</h1>
+<br>
+Values:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+<% @state.each do |i| %>
+  /<%= "#{i}" %>\<br>
+<% end %>
+‾‾‾‾‾‾‾‾‾‾‾
+<br>
+<%= raw @top %>
+<br>
+<%= raw @row1 %>
+<br>
+<%= raw @row2 %>
+<br>
+<%= raw @row3 %>
+<br>
+<%= raw @row4 %>
+<br>
+<%= raw @row5 %>
+<br>
+<%= raw @bottom %>
+<br>
+<br>
+<% @rows.each do |r| %>
+  <%= raw "#{r}" %><br>
+<% end %>
+<br>
+<br>
+Test<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;/x\&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;/o o\&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;/o o o\&nbsp;&nbsp;<br>
+&nbsp;/o o o o\&nbsp;<br>
+/o o o o o\<br>
+‾‾‾‾‾‾‾‾‾‾‾
+
+
