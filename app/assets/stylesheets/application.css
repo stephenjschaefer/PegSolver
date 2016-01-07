@@ -13,3 +13,6 @@
  *= require_tree .
  *= require_self
  */
+h1 {
+    padding-left: 60px;
+}

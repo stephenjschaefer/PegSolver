@@ -3,7 +3,8 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 // Set font family and size so peg board is drawn correctly
-body {
+div#board {
   font-family: monospace;
   font-size: -webkit-xxx-large;
+  padding-left: 10px;;
 }
