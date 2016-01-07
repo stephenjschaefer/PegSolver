@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 # Declare Ruby version for Heroku
 ruby '2.2.3'
+gem 'rails_12factor'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
