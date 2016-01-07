@@ -4,6 +4,7 @@ class BoardController < ApplicationController
     @state = board.state
     @valid_moves = board.valid_moves
     @show_valid_moves = board.show_valid_moves
+    @is_solved = board.is_solved
     @top = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
     @row1 = "&nbsp;&nbsp;&nbsp;&nbsp;/#{board.decode(@state[0])}\\&nbsp;&nbsp;&nbsp;&nbsp;"
     @row2 = "&nbsp;&nbsp;&nbsp;/#{board.decode(@state[1])} #{board.decode(@state[2])}\\&nbsp;&nbsp;&nbsp;"

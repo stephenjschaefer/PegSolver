@@ -1,13 +1,17 @@
 class Board
   include ActiveModel::Model
 
+  #Position indexes starts at 0 for top position, then increments from top to bottom, going left to right.
+
   attr_accessor :state
+  @state = :state
 
   # Get Valid Moves Array
   def valid_moves
     [[3,5],[6,8],[7,9],[0,5,10,12],[11,14],[0,3,12,14],[1,8],[2,9],[1,6],[2,7],[3,12],[4,13],[3,5,10,14],[4,11],[5,12]]
   end
 
+  # Builds a list of valid moves for each position.
   def show_valid_moves
     @valid_moves = valid_moves
     @result = ''
@@ -28,4 +32,10 @@ class Board
   def decode (value)
     value.to_s.sub(/[0]/,'o').sub(/[1]/,'x')
   end
+
+  # Returns true if only one peg is remaining
+  def is_solved
+    self.state.count(0) == 1
+  end
+
 end
