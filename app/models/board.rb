@@ -38,4 +38,28 @@ class Board
     self.state.count(0) == 1
   end
 
+  # Helper to parse a move string into an Integer array
+  def parse_move (value)
+    value.split(/:/).map {|i| Integer(i)}
+  end
+  # Returns true if move is valid
+  # Move format is [From]:[Over]:[To] Ex: '3:1:0'
+  def is_valid_move (value)
+    #@move = value.split(/:/).map {|i| Integer(i)}
+    @move = self.parse_move(value)
+    self.state[@move[0]] == 0 && self.state[@move[1]] == 0 && self.state[@move[2]] == 1
+  end
+
+  # Make a move
+  def make_move (value)
+    if self.is_valid_move(value)
+      @move = self.parse_move(value)
+      self.state[@move[0]] = 1
+      self.state[@move[1]] = 1
+      self.state[@move[2]] = 0
+      #redirect_to action: 'show'
+    else
+      return false
+    end
+  end
 end
