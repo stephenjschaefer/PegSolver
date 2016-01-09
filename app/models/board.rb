@@ -1,31 +1,47 @@
 class Board
   include ActiveModel::Model
 
-  #Position indexes starts at 0 for top position, then increments from top to bottom, going left to right.
-
   attr_accessor :state
-  @state = :state
+  @valid_moves = [[3,5],[6,8],[7,9],[0,5,10,12],[11,14],[0,3,12,14],[1,8],[2,9],[1,6],[2,7],[3,12],[4,13],[3,5,10,14],[4,11],[5,12]]
 
-  # Get Valid Moves Array
-  def valid_moves
-    [[3,5],[6,8],[7,9],[0,5,10,12],[11,14],[0,3,12,14],[1,8],[2,9],[1,6],[2,7],[3,12],[4,13],[3,5,10,14],[4,11],[5,12]]
+  # Initialize new board instance
+  def initialize(state)
+    @state = state
+  end
+
+  # Draw board
+  def draw_board
+    @board = self
+    @state = @board.state
+    result = ''
+    top = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
+    row1 = '&nbsp;&nbsp;&nbsp;&nbsp;/'+@board.decode(@state[0])+'\\&nbsp;&nbsp;&nbsp;&nbsp;'
+    row2 = "&nbsp;&nbsp;&nbsp;/#{@board.decode(@state[1])} #{@board.decode(@state[2])}\\&nbsp;&nbsp;&nbsp;"
+    row3 = "&nbsp;&nbsp;/#{@board.decode(@state[3])} #{@board.decode(@state[4])} #{@board.decode(@state[5])}\\&nbsp;&nbsp;"
+    row4 = "&nbsp;/#{@board.decode(@state[6])} #{@board.decode(@state[7])} #{@board.decode(@state[8])} #{@board.decode(@state[9])}\\&nbsp;"
+    row5 = "/#{@board.decode(@state[10])} #{@board.decode(@state[11])} #{@board.decode(@state[12])} #{@board.decode(@state[13])} #{@board.decode(@state[14])}\\"
+    bottom = '‾‾‾‾‾‾‾‾‾‾‾'
+    rows = [top, row1, row2, row3, row4, row5, bottom]
+    rows.each do |r|
+      result += r + '<br>'
+    end
+    return result
   end
 
   # Builds a list of valid moves for each position.
-  def show_valid_moves
-    @valid_moves = valid_moves
-    @result = ''
+  def self.show_valid_moves
+    result = ''
     @valid_moves.each do |m|
-      @result += "#{@valid_moves.index(m)}: "
+      result += "#{@valid_moves.index(m)}: "
       m.each do |v|
-        @result += "#{v}"
+        result += "#{v}"
         if m.index(v) < m.size-1
-          @result += ', '
+          result += ', '
         end
       end
-      @result += '<br>'
+      result += '<br>'
     end
-    return @result
+    return result
   end
 
   # Decodes 0 and 1 values in state array to o and x respectively for display
@@ -42,6 +58,7 @@ class Board
   def parse_move (value)
     value.split(/:/).map {|i| Integer(i)}
   end
+
   # Returns true if move is valid
   # Move format is [From]:[Over]:[To] Ex: '3:1:0'
   def is_valid_move (value)

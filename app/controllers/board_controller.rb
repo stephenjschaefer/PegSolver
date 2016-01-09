@@ -1,18 +1,39 @@
 class BoardController < ApplicationController
-  def show
+
+  helper_method :show_valid_moves
+  helper_method :draw_board
+
+  def index
     @board = Board.new(state: [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0])
-    @state = @board.state
-    @valid_moves = @board.valid_moves
-    @show_valid_moves = @board.show_valid_moves
-    @is_solved = @board.is_solved
+    session[:state] = @board.state
+    redirect_to action: 'show'
+  end
+
+  def show
+    #@board
+    #@board = Board.new(state: [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0])
+    #@board = Board
+    #@valid_moves = Board  #@board.valid_moves
+    #@show_valid_moves = @board.show_valid_moves
+    #@test = 'test'
+    #@is_solved = @board.is_solved
     #@is_valid_move = @board.is_valid_move()
-    @top = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
-    @row1 = "&nbsp;&nbsp;&nbsp;&nbsp;/#{@board.decode(@state[0])}\\&nbsp;&nbsp;&nbsp;&nbsp;"
-    @row2 = "&nbsp;&nbsp;&nbsp;/#{@board.decode(@state[1])} #{@board.decode(@state[2])}\\&nbsp;&nbsp;&nbsp;"
-    @row3 = "&nbsp;&nbsp;/#{@board.decode(@state[3])} #{@board.decode(@state[4])} #{@board.decode(@state[5])}\\&nbsp;&nbsp;"
-    @row4 = "&nbsp;/#{@board.decode(@state[6])} #{@board.decode(@state[7])} #{@board.decode(@state[8])} #{@board.decode(@state[9])}\\&nbsp;"
-    @row5 = "/#{@board.decode(@state[10])} #{@board.decode(@state[11])} #{@board.decode(@state[12])} #{@board.decode(@state[13])} #{@board.decode(@state[14])}\\"
-    @bottom = '‾‾‾‾‾‾‾‾‾‾‾'
-    @rows = [@top, @row1, @row2, @row3, @row4, @row5, @bottom]
+    #
+  end
+
+  def make_move
+    #@make_move = Board.make_move('3:1:0')
+    #self.show
+  end
+
+  # Show valid moves defined for Board model
+  def show_valid_moves
+    Board.show_valid_moves
+  end
+
+  # Draw board
+  def draw_board
+    @board = Board.new(state: session[:state])
+    @board.draw_board
   end
 end
