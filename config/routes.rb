@@ -2,18 +2,6 @@ Rails.application.routes.draw do
   get 'board/show'
   get 'board/make_move'
 
-  namespace :pages do
-  get 'peg_solver/DrawBoard'
-  end
-
-  namespace :pages do
-  get 'peg_solver/Solve'
-  end
-
-  namespace :pages do
-  get 'hello_world/SayHello'
-  end
-
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

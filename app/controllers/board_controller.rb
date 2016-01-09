@@ -11,7 +11,7 @@ class BoardController < ApplicationController
   end
 
   def show
-
+    @board = Board.new(session[:state])
   end
 
   def make_move
@@ -28,7 +28,6 @@ class BoardController < ApplicationController
 
   # Draw board
   def draw_board
-    @board = Board.new(session[:state])
     @board.draw_board
   end
 
