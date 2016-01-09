@@ -62,7 +62,6 @@ class Board
   # Returns true if move is valid
   # Move format is [From]:[Over]:[To] Ex: '3:1:0'
   def is_valid_move (value)
-    #@move = value.split(/:/).map {|i| Integer(i)}
     @move = self.parse_move(value)
     self.state[@move[0]] == 0 && self.state[@move[1]] == 0 && self.state[@move[2]] == 1
   end
@@ -74,9 +73,7 @@ class Board
       self.state[@move[0]] = 1
       self.state[@move[1]] = 1
       self.state[@move[2]] = 0
-      #redirect_to action: 'show'
-    else
-      return false
+      @test = self.state
     end
   end
 end

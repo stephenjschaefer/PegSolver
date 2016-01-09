@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get 'board/show'
+  get 'board/make_move'
 
   namespace :pages do
   get 'peg_solver/DrawBoard'
