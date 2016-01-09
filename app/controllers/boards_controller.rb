@@ -1,4 +1,4 @@
-class BoardController < ApplicationController
+class BoardsController < ApplicationController
 
   helper_method :show_valid_moves
   helper_method :draw_board
@@ -26,7 +26,7 @@ class BoardController < ApplicationController
     Board.show_valid_moves
   end
 
-  # Draw board
+  # Draw boards
   def draw_board
     @board.draw_board
   end

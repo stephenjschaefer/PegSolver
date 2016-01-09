@@ -4,12 +4,12 @@ class Board
   attr_accessor :state
   @valid_moves = [[3,5],[6,8],[7,9],[0,5,10,12],[11,14],[0,3,12,14],[1,8],[2,9],[1,6],[2,7],[3,12],[4,13],[3,5,10,14],[4,11],[5,12]]
 
-  # Initialize new board instance
+  # Initialize new boards instance
   def initialize(state)
     @state = state
   end
 
-  # Draw board
+  # Draw boards
   def draw_board
     @board = self
     @state = @board.state
@@ -75,5 +75,10 @@ class Board
       self.state[@move[2]] = 0
       @test = self.state
     end
+  end
+
+  # Submit Test
+  def submit
+    'Submit Test'
   end
 end
