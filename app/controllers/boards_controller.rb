@@ -12,11 +12,15 @@ class BoardsController < ApplicationController
 
   def show
     @board = Board.new(session[:state])
+    @move
   end
 
   def make_move
     @board = Board.new(session[:state])
-    @board.make_move('3:1:0')
+    #@move = params[:from].to_s + ':2:' + params[:to].to_s
+    @move = params[:from].to_s + ':' + params[:to].to_s
+    @move += ':' + @board.get_jump(@move).to_s
+    @board.make_move(@move)
     session[:state] = @board.state
     redirect_to action: 'show'
   end
