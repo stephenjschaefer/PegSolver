@@ -17,9 +17,9 @@ class BoardsController < ApplicationController
 
   def make_move
     @board = Board.new(session[:state])
-    #@move = params[:from].to_s + ':2:' + params[:to].to_s
-    @move = params[:from].to_s + ':' + params[:to].to_s
-    @move += ':' + @board.get_jump(@move).to_s
+    @move = params[:from].to_s + '.' + params[:to].to_s
+    @jump = Board.get_jump(@move).to_s
+    @move += '.' + @jump
     @board.make_move(@move)
     session[:state] = @board.state
     redirect_to action: 'show'

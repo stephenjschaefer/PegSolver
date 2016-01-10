@@ -1,25 +1,11 @@
 <div id="board">
 <%= raw draw_board %>
 </div>
-<br>
-<%# form_for @move do |f| %>
-    <%# f.label :from %>:
-    <%# f.text_field :from %><br />
-
-    <%# f.label :to %>:
-    <%# f.text_field :to %><br />
-
-    <%# f.submit %>
-<%# end %>
-
 <%= form_tag('/boards/make_move', :method=>'post') do %>
     <%= text_field_tag(:from) %>
     <%= text_field_tag(:to) %>
     <%= submit_tag('Make Move', :class=>'btn', from: :from, to: :to) %>
 <% end %>
-
-<%= link_to 'Make Move', boards_make_move_path %>
-<br>
 <br>
 Valid Moves:<br>
 <%= raw show_valid_moves %>
