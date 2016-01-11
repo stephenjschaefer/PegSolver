@@ -30,7 +30,7 @@
     <%= raw draw_board %>
     <%= form_tag('/boards/make_move', :method=>'post') do %>
       <%= label_tag('From') %>
-      <%= text_field_tag(:from, nil, maxlength: 2, size: 2) %>
+      <%= text_field_tag(:from, nil, options = {autofocus: true, maxlength: 2, size: 2}) %>
       <%= label_tag('To') %>
       <%= text_field_tag(:to, nil, maxlength: 2, size: 2) %>
       <%= submit_tag('Make Move', :class=>'btn', from: :from, to: :to) %>
