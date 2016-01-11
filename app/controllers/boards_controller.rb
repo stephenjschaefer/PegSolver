@@ -35,4 +35,28 @@ class BoardsController < ApplicationController
     @board.draw_board
   end
 
+  # Set State No Peg In Top Position
+  def set_state_top
+    session[:state] = [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+    redirect_to action: 'show'
+  end
+
+  # Set State No Peg In Bottom Right Position
+  def set_state_right
+    session[:state] = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,1]
+    redirect_to action: 'show'
+  end
+
+  # Set State No Peg In Bottom Left Position
+  def set_state_left
+    session[:state] = [0,0,0,0,0,0,0,0,0,0,1,0,0,0,0]
+    redirect_to action: 'show'
+  end
+
+  # Set Random State Of Peg Positions
+  def set_state_random
+    session[:state] = [rand(2),rand(2),rand(2),rand(2),rand(2),rand(2),rand(2),rand(2),rand(2),rand(2),rand(2),rand(2),rand(2),rand(2),rand(2)]
+    redirect_to action: 'show'
+  end
+
 end

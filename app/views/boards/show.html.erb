@@ -1,14 +1,49 @@
-<div id="board">
-<%= raw draw_board %>
+<div id="wrapper">
+  <div id="left">
+    <fieldset id="legend">
+      <legend>Legend</legend>
+      <p>X: Empty position.</p>
+      <p>O: Position with a peg.</p>
+    </fieldset>
+    <br>
+    <fieldset>
+      <legend>Set State</legend>
+      <%= form_tag('/boards/set_state_top', :method=>'post') do %>
+          <%= button_tag 'No Peg In The Center Top Position' %>
+      <% end %>
+      <br>
+      <%= form_tag('/boards/set_state_right', :method=>'post') do %>
+          <%= button_tag 'No Peg In The Bottom Right Position' %>
+      <% end %>
+      <br>
+      <%= form_tag('/boards/set_state_left', :method=>'post') do %>
+          <%= button_tag 'No Peg In The Bottom Left Position' %>
+      <% end %>
+      <br>
+      <%= form_tag('/boards/set_state_random', :method=>'post') do %>
+          <%= button_tag 'Random Peg Position State' %>
+      <% end %>
+    </fieldset>
+  </div>
+  <div id="board">
+    <h1>Peg Solver</h1>
+    <%= raw draw_board %>
+    <%= form_tag('/boards/make_move', :method=>'post') do %>
+      <%= label_tag('From') %>
+      <%= text_field_tag(:from, nil, maxlength: 2, size: 2) %>
+      <%= label_tag('To') %>
+      <%= text_field_tag(:to, nil, maxlength: 2, size: 2) %>
+      <%= submit_tag('Make Move', :class=>'btn', from: :from, to: :to) %>
+    <% end %>
+  </div>
+  <div id="right">
+    <fieldset>
+      <legend>Valid Moves</legend>
+      <%= raw show_valid_moves %>
+    </fieldset>
+  </div>
 </div>
-<%= form_tag('/boards/make_move', :method=>'post') do %>
-    <%= text_field_tag(:from) %>
-    <%= text_field_tag(:to) %>
-    <%= submit_tag('Make Move', :class=>'btn', from: :from, to: :to) %>
-<% end %>
-<br>
-Valid Moves:<br>
-<%= raw show_valid_moves %>
+
 <!--
 <br>
 Solved: <%# @is_solved %>

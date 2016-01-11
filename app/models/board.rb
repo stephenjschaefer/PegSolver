@@ -24,7 +24,7 @@ class Board
     bottom = '‾‾‾‾‾‾‾‾‾‾‾'
     rows = [top, row1, row2, row3, row4, row5, bottom]
     rows.each do |r|
-      result += r + '<br>'
+      result += r  + '<br>'
     end
     return result
   end

@@ -57,6 +57,10 @@ Rails.application.routes.draw do
 
   get 'boards/show'
   post 'boards/make_move' => 'boards#make_move'
+  post 'boards/set_state_top' => 'boards#set_state_top'
+  post 'boards/set_state_right' => 'boards#set_state_right'
+  post 'boards/set_state_left' => 'boards#set_state_left'
+  post 'boards/set_state_random' => 'boards#set_state_random'
 
   root 'boards#index'
 end
