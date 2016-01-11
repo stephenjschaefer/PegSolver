@@ -26,7 +26,7 @@ class BoardsController < ApplicationController
       session[:state] = @board.state
       redirect_to action: 'show'
     else
-      flash[:error] = 'Invalid move, please try again.'
+      flash[:error] = 'Invalid move - Please enter a valid move.'
     end
   end
 
@@ -43,18 +43,21 @@ class BoardsController < ApplicationController
   # Set State No Peg In Top Position
   def set_state_top
     session[:state] = [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+    flash[:success] = 'State changed successfully.'
     redirect_to action: 'show'
   end
 
   # Set State No Peg In Bottom Right Position
   def set_state_right
     session[:state] = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,1]
+    flash[:success] = 'State changed successfully.'
     redirect_to action: 'show'
   end
 
   # Set State No Peg In Bottom Left Position
   def set_state_left
     session[:state] = [0,0,0,0,0,0,0,0,0,0,1,0,0,0,0]
+    flash[:success] = 'State changed successfully.'
     redirect_to action: 'show'
   end
 
@@ -70,7 +73,7 @@ class BoardsController < ApplicationController
     random_state = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
     random_state[rand(15)] = 1
     session[:state] = random_state
-    flash[:error] = 'Test error message flash.'
+    flash[:success] = 'State changed successfully.'
     redirect_to action: 'show'
   end
 

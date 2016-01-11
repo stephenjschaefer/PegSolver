@@ -14,6 +14,16 @@
  *= require_self
  */
 
+.messages {
+    position: absolute;
+    //z-index: -1;
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+}
+
 .alertMessage {
     display: table-cell;
     vertical-align: middle;

@@ -7,6 +7,7 @@ div#wrapper {
   width: 800px;
   margin: 0 auto;
   display: flex;
+  padding-top: 65px;
 }
 
 div#left {
@@ -14,7 +15,7 @@ div#left {
   width: 200px;
   font-size: large;
   padding-right: 50px;
-  padding-top: 25px;
+  //padding-top: 25px;
 }
 
 div#left fieldset {
@@ -36,7 +37,7 @@ div#board {
   font-family: monospace;
   font-size: -webkit-xxx-large;
   text-align: center;
-  padding: 10px;
+  //padding: 10px;
   width:400px
 }
 
@@ -53,7 +54,7 @@ div#right {
   width: 200px;
   font-size: large;
   padding-left: 50px;
-  padding-top: 25px;
+  //padding-top: 25px;
 }
 
 div#right fieldset {
