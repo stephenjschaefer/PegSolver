@@ -20,8 +20,12 @@
           <%= button_tag 'No Peg In The Bottom Left Position' %>
       <% end %>
       <br>
-      <%= form_tag('/boards/set_state_random', :method=>'post') do %>
-          <%= button_tag 'Random Peg Position State' %>
+      <%= form_tag('/boards/set_state_random_all', :method=>'post') do %>
+          <%= button_tag 'Multiple Random Missing Pegs' %>
+      <% end %>
+      <br>
+      <%= form_tag('/boards/set_state_random_single', :method=>'post') do %>
+          <%= button_tag 'Single Random Missing Peg' %>
       <% end %>
     </fieldset>
   </div>

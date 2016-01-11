@@ -60,7 +60,8 @@ Rails.application.routes.draw do
   post 'boards/set_state_top' => 'boards#set_state_top'
   post 'boards/set_state_right' => 'boards#set_state_right'
   post 'boards/set_state_left' => 'boards#set_state_left'
-  post 'boards/set_state_random' => 'boards#set_state_random'
+  post 'boards/set_state_random_all' => 'boards#set_state_random_all'
+  post 'boards/set_state_random_single' => 'boards#set_state_random_single'
 
   root 'boards#index'
 end

@@ -53,9 +53,17 @@ class BoardsController < ApplicationController
     redirect_to action: 'show'
   end
 
-  # Set Random State Of Peg Positions
-  def set_state_random
+  # Set Multiple Random Missing Peg Positions
+  def set_state_random_all
     session[:state] = [rand(2),rand(2),rand(2),rand(2),rand(2),rand(2),rand(2),rand(2),rand(2),rand(2),rand(2),rand(2),rand(2),rand(2),rand(2)]
+    redirect_to action: 'show'
+  end
+
+  # Set Single Random Missing Peg Position
+  def set_state_random_single
+    random_state = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+    random_state[rand(15)] = 1
+    session[:state] = random_state
     redirect_to action: 'show'
   end
 
