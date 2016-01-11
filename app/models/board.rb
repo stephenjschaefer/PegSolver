@@ -79,6 +79,9 @@ class Board
       self.state[@move[0]] = 1
       self.state[@move[1]] = 0
       self.state[@move[2]] = 1
+      return true
+    else
+      return false
     end
   end
 

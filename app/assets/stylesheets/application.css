@@ -13,3 +13,32 @@
  *= require_tree .
  *= require_self
  */
+
+.alertMessage {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.alert-error {
+    background-color: lightcoral;
+    text-align: center;
+    font-size: x-large;
+    height: 50px;
+    vertical-align: middle;
+    display: table;
+    margin: 0 auto;
+    width: 95%;
+    border-radius: 15px;
+}
+
+.alert-success {
+    background-color: lightgreen;
+    text-align: center;
+    font-size: x-large;
+    height: 50px;
+    vertical-align: middle;
+    display: table;
+    margin: 0 auto;
+    width: 95%;
+    border-radius: 15px;
+}

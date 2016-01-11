@@ -1,5 +1,7 @@
 class BoardsController < ApplicationController
 
+  include ApplicationHelper
+
   helper_method :show_valid_moves
   helper_method :draw_board
   helper_method :make_move
@@ -20,9 +22,12 @@ class BoardsController < ApplicationController
     @move = params[:from].to_s + '.' + params[:to].to_s
     @jump = Board.get_jump(@move).to_s
     @move += '.' + @jump
-    @board.make_move(@move)
-    session[:state] = @board.state
-    redirect_to action: 'show'
+    if @board.make_move(@move)
+      session[:state] = @board.state
+      redirect_to action: 'show'
+    else
+      flash[:error] = 'Invalid move, please try again.'
+    end
   end
 
   # Show valid moves defined for Board model
@@ -56,6 +61,7 @@ class BoardsController < ApplicationController
   # Set Multiple Random Missing Peg Positions
   def set_state_random_all
     session[:state] = [rand(2),rand(2),rand(2),rand(2),rand(2),rand(2),rand(2),rand(2),rand(2),rand(2),rand(2),rand(2),rand(2),rand(2),rand(2)]
+    flash[:success] = 'State changed successfully.'
     redirect_to action: 'show'
   end
 
@@ -64,6 +70,7 @@ class BoardsController < ApplicationController
     random_state = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
     random_state[rand(15)] = 1
     session[:state] = random_state
+    flash[:error] = 'Test error message flash.'
     redirect_to action: 'show'
   end
 
