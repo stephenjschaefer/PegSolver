@@ -17,10 +17,6 @@
 
 //Fade out flash on click or timeout expiry
 $(document).ready(function(){
-    $('.alert').load(function(){
-        $('.alert').hide().delay(500).fadeIn(2000);
-    });
-
     $('.alert').click(function(){
         $('.alert').fadeOut(1000);
     });

@@ -15,7 +15,6 @@ div#left {
   width: 200px;
   font-size: large;
   padding-right: 50px;
-  //padding-top: 25px;
 }
 
 div#left fieldset {
@@ -29,6 +28,12 @@ div#left fieldset#legend {
   -webkit-padding-after: 0px;
 }
 
+div#left fieldset#positions {
+  line-height: 1em;
+  -webkit-padding-before: 0px;
+  -webkit-padding-after: 0px;
+}
+
 div#left p {
   font-size: medium;
 }
@@ -37,7 +42,6 @@ div#board {
   font-family: monospace;
   font-size: -webkit-xxx-large;
   text-align: center;
-  //padding: 10px;
   width:400px
 }
 
@@ -54,12 +58,13 @@ div#right {
   width: 200px;
   font-size: large;
   padding-left: 50px;
-  //padding-top: 25px;
 }
 
 div#right fieldset {
   width: 150px;
-  -webkit-padding-before: 15px;
+  -webkit-padding-before: 5px;
+  -webkit-padding-after: 5px;
+  //height: 130px;
 }
 
 
