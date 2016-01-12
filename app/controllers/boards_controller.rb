@@ -20,7 +20,7 @@ class BoardsController < ApplicationController
   def make_move
     @board = Board.new(session[:state])
     @move = params[:from].to_s + '.' + params[:to].to_s
-    @jump = Board.get_jump(@move).to_s
+    @jump = @board.get_jump(@move).to_s
     @move += '.' + @jump
     if @board.make_move(@move)
       session[:state] = @board.state
@@ -32,7 +32,9 @@ class BoardsController < ApplicationController
 
   # Show valid moves defined for Board model
   def show_valid_moves
-    Board.show_valid_moves
+    #Board.show_valid_moves
+    @board = Board.new(session[:state])
+    @board.show_valid_moves
   end
 
   # Draw boards

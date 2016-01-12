@@ -2,8 +2,8 @@ class Board
   include ActiveModel::Model
 
   attr_accessor :state
-  @valid_moves = [[3,5],[6,8],[7,9],[0,5,10,12],[11,13],[0,3,12,14],[1,8],[2,9],[1,6],[2,7],[3,12],[4,13],[3,5,10,14],[4,11],[5,12]]
-  @valid_jumps = {:'0.3' => 1, :'0.5' => 2, :'1.6' => 3, :'1.8' => 4, :'2.7' => 4, :'2.9' => 5, :'3.0' => 1, :'3.5' => 4, :'3.10' => 6, :'3.12' => 7, :'4.11' => 7, :'4.13' => 8, :'5.0' => 2, :'5.3' => 4, :'5.12' => 8, :'5.14' => 9, :'6.1' => 3, :'6.8' => 7, :'7.2' => 4, :'7.9' => 8, :'8.1' => 4, :'8.6' => 7, :'9.2' => 5, :'9.7' => 8, :'10.3' => 6, :'10.12' => 11, :'11.4' => 7, :'11.13' => 12, :'12.3' => 7, :'12.5' => 8, :'12.10' => 11, :'12.14' => 13, :'13.4' => 8, :'13.11' => 12, :'14.5' => 9, :'14.12' => 13}
+  @@valid_moves = [[3,5],[6,8],[7,9],[0,5,10,12],[11,13],[0,3,12,14],[1,8],[2,9],[1,6],[2,7],[3,12],[4,13],[3,5,10,14],[4,11],[5,12]]
+  @@valid_jumps = {:'0.3' => 1, :'0.5' => 2, :'1.6' => 3, :'1.8' => 4, :'2.7' => 4, :'2.9' => 5, :'3.0' => 1, :'3.5' => 4, :'3.10' => 6, :'3.12' => 7, :'4.11' => 7, :'4.13' => 8, :'5.0' => 2, :'5.3' => 4, :'5.12' => 8, :'5.14' => 9, :'6.1' => 3, :'6.8' => 7, :'7.2' => 4, :'7.9' => 8, :'8.1' => 4, :'8.6' => 7, :'9.2' => 5, :'9.7' => 8, :'10.3' => 6, :'10.12' => 11, :'11.4' => 7, :'11.13' => 12, :'12.3' => 7, :'12.5' => 8, :'12.10' => 11, :'12.14' => 13, :'13.4' => 8, :'13.11' => 12, :'14.5' => 9, :'14.12' => 13}
 
   # Initialize new boards instance
   def initialize(state)
@@ -30,12 +30,12 @@ class Board
   end
 
   # Returns the jumped peg position for a given move
-  def self.get_jump(move)
-    @valid_jumps[move.to_s.to_sym]
+  def get_jump(move)
+    @@valid_jumps[move.to_s.to_sym]
   end
 
-  # Builds a list of valid moves for each position.
-  def self.show_valid_moves
+  # Builds a list of all valid moves for each position.
+  def show_all_valid_moves
     result = ''
     @valid_moves.each do |m|
       result += "#{@valid_moves.index(m)} => "
@@ -48,6 +48,29 @@ class Board
       result += '<br>'
     end
     return result
+  end
+
+  # Builds a list of valid moves for the current board state
+  def show_valid_moves
+    #Determine valid moves for given state
+    result = Array.new
+    text = ''
+    @@valid_moves.each do |f|
+      f.each do |t|
+        move = @@valid_moves.index(f).to_s + '.' + t.to_s
+        jump = self.get_jump(move)
+        move += '.' + jump.to_s
+        if self.is_valid_move(move)
+          result.unshift(move)
+        end
+      end
+    end
+    #Format valid moves for display
+    result.reverse_each do |p|
+      moveArray = self.parse_move(p)
+      text += 'From ' + moveArray[0].to_s + ' to ' + moveArray[1].to_s + '<br>'
+    end
+    return text
   end
 
   # Decodes 0 and 1 values in state array to o and x respectively for display
