@@ -64,7 +64,10 @@ div#right fieldset {
   width: 150px;
   -webkit-padding-before: 5px;
   -webkit-padding-after: 5px;
-  //height: 130px;
+}
+
+div#right fieldset#solutions {
+  vertical-align: bottom;
 }
 
 

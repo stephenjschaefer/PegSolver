@@ -7,6 +7,9 @@ gem 'rails_12factor'
 # ActiveModel used for non database backed model
 gem 'activemodel'
 
+# Use RubyTree for solution tree
+gem 'rubytree'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
 # Use postgreSQL as the database for Active Record

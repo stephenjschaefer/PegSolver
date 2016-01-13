@@ -5,6 +5,7 @@ class BoardsController < ApplicationController
   helper_method :show_valid_moves
   helper_method :draw_board
   helper_method :make_move
+  helper_method :build_solution
 
   # Initialize a new game.
   def index
@@ -107,6 +108,13 @@ class BoardsController < ApplicationController
   # Handle end of game winner
   def game_over_win
     flash[:success] = 'Game Over: Great Job, You Won!'
+  end
+
+  # Build Solution
+  def build_solution
+    @board = Board.new(session[:state])
+    root_node = Tree::TreeNode.new('ROOT', @board.state)
+    @board.build_solution(root_node, '1')
   end
 
 end

@@ -123,5 +123,35 @@ class Board
     end
   end
 
+  # Make a move to build solution tree
+  def make_move_solution (value, tree_state)
+    if self.is_valid_move(value)
+      @move = self.parse_move(value)
+      tree_state[@move[0]] = 1
+      tree_state[@move[1]] = 0
+      tree_state[@move[2]] = 1
+    end
+  end
+
+  # Build Solution Tree
+  def build_solution (node, level)
+    root_node = node
+    tree_state = Array.new
+    orig_state = Array.new
+    temp_state = Array.new
+    tree_state.replace(self.state)
+    valid_moves = self.get_valid_moves
+
+    valid_moves.each do |m|
+      orig_state.replace(tree_state)
+      temp_state.replace(tree_state)
+      self.make_move_solution(m, temp_state)
+      if !(temp_state == orig_state)
+        root_node.add (Tree::TreeNode.new('LVL'+level+':'+m, tree_state))
+      end
+    end
+
+    root_node.print_tree
+  end
 
 end
