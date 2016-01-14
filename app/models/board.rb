@@ -4,6 +4,7 @@ class Board
   attr_accessor :state
   @@valid_moves = [[3,5],[6,8],[7,9],[0,5,10,12],[11,13],[0,3,12,14],[1,8],[2,9],[1,6],[2,7],[3,12],[4,13],[3,5,10,14],[4,11],[5,12]]
   @@valid_jumps = {:'0.3' => 1, :'0.5' => 2, :'1.6' => 3, :'1.8' => 4, :'2.7' => 4, :'2.9' => 5, :'3.0' => 1, :'3.5' => 4, :'3.10' => 6, :'3.12' => 7, :'4.11' => 7, :'4.13' => 8, :'5.0' => 2, :'5.3' => 4, :'5.12' => 8, :'5.14' => 9, :'6.1' => 3, :'6.8' => 7, :'7.2' => 4, :'7.9' => 8, :'8.1' => 4, :'8.6' => 7, :'9.2' => 5, :'9.7' => 8, :'10.3' => 6, :'10.12' => 11, :'11.4' => 7, :'11.13' => 12, :'12.3' => 7, :'12.5' => 8, :'12.10' => 11, :'12.14' => 13, :'13.4' => 8, :'13.11' => 12, :'14.5' => 9, :'14.12' => 13}
+  @@solution_node = nil
 
   # Initialize new boards instance.
   def initialize(state)
@@ -121,6 +122,7 @@ class Board
       self.state[@move[0]] = 1
       self.state[@move[1]] = 0
       self.state[@move[2]] = 1
+      @@solution_node = nil
       return true
     else
       return false
@@ -141,6 +143,7 @@ class Board
   def build_solution (node, level, state, count)
     solution_count = count
     root_node = node
+    #@@solution_node = nil
     tree_state = Array.new
     orig_state = Array.new
     temp_state = Array.new
@@ -153,22 +156,32 @@ class Board
       self.make_move_solution(m, temp_state)
       if !(temp_state == orig_state)
         root_node.add (Tree::TreeNode.new('LVL'+level.to_s+':'+m, temp_state.clone))
-        if temp_state.count(0) == 1
-          solution_count = solution_count + 1
+        temp_count = temp_state.count(0)
+        if temp_count == 1
+          #solution_count = solution_count + 1
+          @@solution_node = root_node['LVL'+level.to_s+':'+m]
         end
+      end
+      if @@solution_node.present?
+        break
       end
     end
 
     # Recursively build the tree
-    #root_node.children
-    if level < 2
+    if !@@solution_node.present?
       root_node.children.each do |n|
-        self.build_solution(n, level+1, n.content, solution_count)
+        if !@@solution_node.present?
+          self.build_solution(n, level+1, n.content, solution_count)
+        end
       end
     end
 
-    solution_count
+    @@solution_node
 
+  end
+
+  def get_solution_state
+    @@solution_node.present? || self.state.count(0) == 1
   end
 
 end

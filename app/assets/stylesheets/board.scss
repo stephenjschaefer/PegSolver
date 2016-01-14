@@ -56,7 +56,7 @@ div#board h1 {
 div#right {
   float: right;
   width: 200px;
-  font-size: large;
+  font-size: medium;
   padding-left: 50px;
 }
 
@@ -67,7 +67,11 @@ div#right fieldset {
 }
 
 div#right fieldset#solutions {
-  vertical-align: bottom;
+  line-height: 5px;
+}
+
+div#right fieldset#moves {
+  height: 365px;
 }
 
 

@@ -27,9 +27,9 @@ class BoardsController < ApplicationController
       end
     end
     @move
-    #Build Solution Tree
-    @solution_count = build_solution
-
+    #Build Solution Tree And Return Solution Node
+    @solution_node = build_solution
+    @solution_exists = @board.get_solution_state.to_s.capitalize
   end
 
   # Make a move.
