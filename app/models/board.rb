@@ -31,7 +31,7 @@ class Board
 
   # Return count of number of valid moves for a given state.
   def get_valid_move_count
-    result = self.get_valid_moves
+    result = self.get_valid_moves(self.state)
     result.size
   end
 
@@ -62,14 +62,18 @@ class Board
   end
 
   # Builds an array of valid moves for the current board state.
-  def get_valid_moves
+  def get_valid_moves (state)
+    cur_state = state
+    if !state.present?
+      cur_state = self.state
+    end
     result = Array.new
     @@valid_moves.each do |f|
       f.each do |t|
         move = @@valid_moves.index(f).to_s + '.' + t.to_s
         jump = self.get_jump(move)
         move += '.' + jump.to_s
-        if self.is_valid_move(move)
+        if self.is_valid_move(move, cur_state)
           result.unshift(move)
         end
       end
@@ -80,7 +84,7 @@ class Board
   # Builds a list of valid moves for the current board state for display.
   def show_valid_moves
     text = ''
-    result = self.get_valid_moves
+    result = self.get_valid_moves(self.state)
     result.reverse_each do |p|
       moveArray = self.parse_move(p)
       text += 'From ' + moveArray[0].to_s + ' to ' + moveArray[1].to_s + '<br>'
@@ -105,14 +109,14 @@ class Board
 
   # Returns true if move is valid.
   # Move format is [From].[To].[Over] Ex => '3.0.1'.
-  def is_valid_move (value)
+  def is_valid_move (value, state)
     @move = self.parse_move(value)
-    self.state[@move[0]] == 0 && self.state[@move[1]] == 1 && self.state[@move[2]] == 0
+    state[@move[0]] == 0 && state[@move[1]] == 1 && state[@move[2]] == 0
   end
 
   # Make a move.
   def make_move (value)
-    if self.is_valid_move(value)
+    if self.is_valid_move(value, self.state)
       @move = self.parse_move(value)
       self.state[@move[0]] = 1
       self.state[@move[1]] = 0
@@ -124,34 +128,47 @@ class Board
   end
 
   # Make a move to build solution tree
-  def make_move_solution (value, tree_state)
-    if self.is_valid_move(value)
+  def make_move_solution (value, temp_state)
+    if self.is_valid_move(value, temp_state)
       @move = self.parse_move(value)
-      tree_state[@move[0]] = 1
-      tree_state[@move[1]] = 0
-      tree_state[@move[2]] = 1
+      temp_state[@move[0]] = 1
+      temp_state[@move[1]] = 0
+      temp_state[@move[2]] = 1
     end
   end
 
   # Build Solution Tree
-  def build_solution (node, level)
+  def build_solution (node, level, state, count)
+    solution_count = count
     root_node = node
     tree_state = Array.new
     orig_state = Array.new
     temp_state = Array.new
-    tree_state.replace(self.state)
-    valid_moves = self.get_valid_moves
+    tree_state.replace(state)
+    valid_moves = self.get_valid_moves(state)
 
     valid_moves.each do |m|
       orig_state.replace(tree_state)
       temp_state.replace(tree_state)
       self.make_move_solution(m, temp_state)
       if !(temp_state == orig_state)
-        root_node.add (Tree::TreeNode.new('LVL'+level+':'+m, tree_state))
+        root_node.add (Tree::TreeNode.new('LVL'+level.to_s+':'+m, temp_state.clone))
+        if temp_state.count(0) == 1
+          solution_count = solution_count + 1
+        end
       end
     end
 
-    root_node.print_tree
+    # Recursively build the tree
+    #root_node.children
+    if level < 2
+      root_node.children.each do |n|
+        self.build_solution(n, level+1, n.content, solution_count)
+      end
+    end
+
+    solution_count
+
   end
 
 end

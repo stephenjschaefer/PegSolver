@@ -27,6 +27,9 @@ class BoardsController < ApplicationController
       end
     end
     @move
+    #Build Solution Tree
+    @solution_count = build_solution
+
   end
 
   # Make a move.
@@ -114,7 +117,7 @@ class BoardsController < ApplicationController
   def build_solution
     @board = Board.new(session[:state])
     root_node = Tree::TreeNode.new('ROOT', @board.state)
-    @board.build_solution(root_node, '1')
+    @board.build_solution(root_node, 1, @board.state, 0)
   end
 
 end
