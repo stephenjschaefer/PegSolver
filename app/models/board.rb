@@ -129,7 +129,7 @@ class Board
     end
   end
 
-  # Make a move to build solution tree
+  # Make a move to build solution tree.
   def make_move_solution (value, temp_state)
     if self.is_valid_move(value, temp_state)
       @move = self.parse_move(value)
@@ -139,11 +139,10 @@ class Board
     end
   end
 
-  # Build Solution Tree
+  # Build solution tree and search for a solution.
   def build_solution (node, level, state, count)
     solution_count = count
     root_node = node
-    #@@solution_node = nil
     tree_state = Array.new
     orig_state = Array.new
     temp_state = Array.new
@@ -158,7 +157,6 @@ class Board
         root_node.add (Tree::TreeNode.new('LVL'+level.to_s+':'+m, temp_state.clone))
         temp_count = temp_state.count(0)
         if temp_count == 1
-          #solution_count = solution_count + 1
           @@solution_node = root_node['LVL'+level.to_s+':'+m]
         end
       end
@@ -167,7 +165,7 @@ class Board
       end
     end
 
-    # Recursively build the tree
+    # Recursively build the solution tree.
     if !@@solution_node.present?
       root_node.children.each do |n|
         if !@@solution_node.present?
@@ -180,6 +178,7 @@ class Board
 
   end
 
+  # Return True or False indicating if a solution exists.
   def get_solution_state
     @@solution_node.present? || self.state.count(0) == 1
   end
